@@ -9,24 +9,25 @@
 2. 一套代码，多端发布，是众多开发者努力的方向，但无论如何，为了获得更大的灵活性，平台差异始终直接或间接恶心着混合开发者。据我所知的不少hybird平台，都在尝试在提供足够灵活性的同时掩盖平台差异，我接触不多也不深入，像AppCan、UniApp，就我所触及部分来说，有几点体会“首先，这些三方平台无论如何优秀，在财力投入和技术积累等各方面始终与Android和IOS的实力相差较大，三方平台经常遇到文档不足或描述不精确、文档更新不及时、测试不完全、莫名其妙问题得不到解释等等；其次，三方平台能挺多久，使用三方平台积累的使用经验是否会直接报废？”，产生这些疑虑都有事实依据，本不想自己费力不讨好造这么个轮子，毕竟以前使用uniapp还是可以的，自从过了几个月啥都没动的uniapp项目再次打包发现就无法签名，搜索无果不了了之，这只是无法签名，什么时候打出的apk如果部分机型不兼容呢？引起重新思考，而这个轮子原则上是“求同存异”不为掩盖平台差异，只把相同的地方提取出来，若想得到平台特定功能，需自己去完善这些功能并把这些依附到提出的公共部分，因此代码量就很少了，使用平台功能越少也更利于测试全面覆盖及减少深度定制系统的兼容性触雷的可能。
 
 目录结构：
- + ./android_webview     -> 工程目录（本目录下的bat文件用于生成工程、编译打包apk，可用于工程下的所有项目，使用方式参考使用说明）。
+ + ./android_webview/     -> 工程目录（本目录下的bat文件用于生成工程、编译打包apk，可用于工程下的所有项目，使用方式参考使用说明）。
     -  conf.bat            -> 配置文件，在其中设置打包生成的apk名称，为目录结构简单，该配置作用于整个工程（所有工程的apk都是这个名字），要生成不同的apk名称，打包前修改即可。
     -  env.bat             -> 配置文件，要配置成你本地的“android-sdk、java-sdk”的路径。（要配置到哪个版本或哪一层子路径，请按照本文件的原始配置举一反三）
     -  myjavac21.bat       -> 编译、打包工具，文件名中的21表示本文件的版本为2.1。
     -  new-project.bat     -> 创建新项目工具。
-    +  webview             -> 项目目录，同一工程目录下可有多个项目目录，用new-project.bat进行创建，本目录下的子目录结构和名称除res外可随意调整，但调整后须对myjavac21.bat中的路径进行相应修改
-      +  src                 -> new-project.bat自动生成该路径，本项目中用来存放java源代码
-      +  res                 -> new-project.bat自动生成该路径，android资源文件路径，可在其相应子目录增加些图片、布局等，android-sdk资源打包工具会使用它们，所以其子目录结构一般是固定的
-        +  drawable-hdpi
-        +  drawable-ldpi
-        +  drawable-mdpi
-        +  drawable-xdpi
-        +  layout
-        +  values
-      +  bin                 -> new-project.bat自动生成该路径，本项目中用来存储java编译出的class、class打包成的classes.dex以及apk文件。（该目录可删除，myjavac21.bat打包时自动生成）
-      +  gen                 -> 存放资源文件生成的R.java，以及自动生成的，用于签名apk的密钥。（该目录可删除，myjavac21.bat打包时自动生成）
-      +  jar                 -> 存放依赖jar包
-      +  assets              -> 存放本地网页文件，html、js、css、图片等，如果直接使用远程URL，就不用把html等放这了
+    +  webview/             -> 项目目录，同一工程目录下可有多个项目目录，用new-project.bat进行创建，本目录下的子目录结构和名称除res外可随意调整，但调整后须对myjavac21.bat中的路径进行相应修改
+      +  src/                 -> new-project.bat自动生成该路径，本项目中用来存放java源代码
+        + xxx/xxx/              ->代码目录下共3个文件“MainActivity.java、DefaultWebViewClient.java、DefaultWebChromeClient.java”，其中“DefaultWebViewClient.java”使用AgentWeb中的关键代码进行整理和修改，私以为这些源码有较大重构空间，目前重构了一部分，还未完全完成（代码功能是正常的，“基本”可以放心用）
+      +  res/                 -> new-project.bat自动生成该路径，android资源文件路径，可在其相应子目录增加些图片、布局等，android-sdk资源打包工具会使用它们，所以其子目录结构一般是固定的
+        +  drawable-hdpi/
+        +  drawable-ldpi/
+        +  drawable-mdpi/
+        +  drawable-xdpi/
+        +  layout/
+        +  values/
+      +  bin/                 -> new-project.bat自动生成该路径，本项目中用来存储java编译出的class、class打包成的classes.dex以及apk文件。（该目录可删除，myjavac21.bat打包时自动生成）
+      +  gen/                 -> 存放资源文件生成的R.java，以及自动生成的，用于签名apk的密钥。（该目录可删除，myjavac21.bat打包时自动生成）
+      +  jar/                 -> 存放依赖jar包
+      +  assets/              -> 存放本地网页文件，html、js、css、图片等，如果直接使用远程URL，就不用把html等放这了
       -  AndroidManifest.xml -> android项目的基本配置文件，使用方法上网查
       -  ant.properties      -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
       -  build.xml           -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
