@@ -26,7 +26,8 @@
         +  values/
       +  bin/                 -> new-project.bat自动生成该路径，本项目中用来存储java编译出的class、class打包成的classes.dex以及apk文件。（该目录可删除，myjavac21.bat打包时自动生成）
       +  gen/                 -> 存放资源文件生成的R.java，以及自动生成的，用于签名apk的密钥。（该目录可删除，myjavac21.bat打包时自动生成）
-      +  jar/                 -> 存放依赖jar包
+      +  jar/                 -> 手动创建该目录，存放依赖jar包（new-project.bat创建项目时会生成一个libs用于存放jar包，此处为了与存放so文件的lib目录便于区分，手动改名为jar）
+      +  lib/                 -> 手动创建该目录，存放so库文件，该目录名是固定的，对应于apk包中的lib路径，本项目用不到，所以不需要该目录，myjavac21.bat也未对此路径进行处理，若要添加so库，需自行添加处理过程
       +  assets/              -> 存放本地网页文件，html、js、css、图片等，如果直接使用远程URL，就不用把html等放这了
       -  AndroidManifest.xml -> android项目的基本配置文件，使用方法上网查
       -  ant.properties      -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
