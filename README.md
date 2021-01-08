@@ -15,26 +15,26 @@
     -  myjavac21.bat       -> 编译、打包工具，文件名中的21表示本文件的版本为2.1。
     -  new-project.bat     -> 创建新项目工具。
     +  webview/             -> 项目目录，同一工程目录下可有多个项目目录，用new-project.bat进行创建，本目录下的子目录结构和名称除res外可随意调整，但调整后须对myjavac21.bat中的路径进行相应修改
-      +  src/                 -> new-project.bat自动生成该路径，本项目中用来存放java源代码
+      +  src/                 -> 【new-project.bat自动生成】在路径下还会生成一个初始的继承自android.app.Activity类的java源文件（apk入口），在本项目中继续使用本目录存放java源代码
         + xxx/xxx/              ->代码目录下共3个文件“MainActivity.java、DefaultWebViewClient.java、DefaultWebChromeClient.java”，其中“DefaultWebViewClient.java”使用AgentWeb中的关键代码进行整理和修改，私以为这些源码有较大重构空间，目前重构了一部分，还未完全完成（代码功能是正常的，“基本”可以放心用）
-      +  res/                 -> new-project.bat自动生成该路径，android资源文件路径，可在其相应子目录增加些图片、布局等，android-sdk资源打包工具会使用它们，所以其子目录结构一般是固定的
+      +  res/                 -> 【new-project.bat自动生成】android资源文件路径，可在其相应子目录增加些图片、布局等，android-sdk资源打包工具会使用它们，所以其子目录结构一般是固定的
         +  drawable-hdpi/
         +  drawable-ldpi/
         +  drawable-mdpi/
         +  drawable-xdpi/
         +  layout/
         +  values/
-      +  bin/                 -> new-project.bat自动生成该路径，本项目中用来存储java编译出的class、class打包成的classes.dex以及apk文件。（该目录可删除，myjavac21.bat打包时自动生成）
-      +  gen/                 -> 存放资源文件生成的R.java，以及自动生成的，用于签名apk的密钥。（该目录可删除，myjavac21.bat打包时自动生成）
-      +  jar/                 -> 手动创建该目录，存放依赖jar包（new-project.bat创建项目时会生成一个libs用于存放jar包，此处为了与存放so文件的lib目录便于区分，手动改名为jar）
-      +  lib/                 -> 手动创建该目录，存放so库文件，该目录名是固定的，对应于apk包中的lib路径，本项目用不到，所以不需要该目录，myjavac21.bat也未对此路径进行处理，若要添加so库，需自行添加处理过程
-      +  assets/              -> 存放本地网页文件，html、js、css、图片等，如果直接使用远程URL，就不用把html等放这了
+      +  bin/                 -> 【new-project.bat自动生成，该目录可删除，myjavac21.bat每次打包也会自动生成】本项目中用来存储java编译出的class、class打包成的classes.dex以及apk文件。
+      +  gen/                 -> 【myjavac21.bat自动生成，该目录可删除，每次打包自动生成】存放资源文件生成的R.java，以及自动生成的，用于签名apk的密钥。
+      +  jar/                 -> 【手动创建】存放依赖jar包（new-project.bat创建项目时会生成一个libs用于存放jar包，此处为了与存放so文件的lib目录便于区分，手动改名为jar）
+      +  lib/                 -> 【手动创建】存放so库文件，该目录名是固定的，对应于apk包中的lib路径，本项目用不到，所以不需要该目录，myjavac21.bat也未对此路径进行处理，若要添加so库，需自行添加处理过程
+      +  assets/              -> 【手动创建】存放本地网页文件，html、js、css、图片等，如果直接使用远程URL，就不用把html等放这了
       -  AndroidManifest.xml -> android项目的基本配置文件，使用方法上网查
-      -  ant.properties      -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
-      -  build.xml           -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
-      -  local.properties    -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
-      -  proguard-project.txt-> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
-      -  project.properties  -> new-project.bat自动生成该文件，应该是ant打包用的，应该能删掉
+      -  ant.properties      -> new-project.bat自动生成该文件，应该是ant打包用的，直接删掉
+      -  build.xml           -> new-project.bat自动生成该文件，应该是ant打包用的，直接删掉
+      -  local.properties    -> new-project.bat自动生成该文件，应该是ant打包用的，直接删掉
+      -  proguard-project.txt-> new-project.bat自动生成该文件，应该是ant打包用的，直接删掉
+      -  project.properties  -> new-project.bat自动生成该文件，应该是ant打包用的，直接删掉
       
 使用说明：
 1. apk打包工具的使用
